@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
@@ -11,20 +12,24 @@ public class BaseHTTPClient {
     private String orderListAPIMethod = "api/v1/orders";
     private String orderCancelAPIMethod = "api/v1/orders/cancel";
 
+    @Step("Send GET request")
     protected Response doGetRequest(String apiMethod) {
         return given().header("Content-type", JSON).get(baseUrl + apiMethod);
     }
+    @Step("Send POST request")
     protected Response doPostRequest(String apiMethod, String requestBody) {
         return given().header("Content-type", JSON).and().body(requestBody).when().post(baseUrl + apiMethod);
     }
+    @Step("Send POST request")
     protected Response doPostRequestOrderBody(String apiMethod, Order requestBody) {
         return given().header("Content-type", JSON).and().body(requestBody).when().post(baseUrl + apiMethod);
     }
-
+    @Step("Delete courier")
     protected void deleteCourier(Courier courier) {
         String courierId = given().header("Content-type", JSON).and().body(courier.getLoginRequestBody()).when().post(baseUrl + loginAPIMethod).then().extract().response().body().path("[0].id");
         given().header("Content-type", JSON).and().body("{\"id\":" + courierId + "}").when().delete(baseUrl + deleteCourierAPIMethod);
     }
+    @Step("Cancel order")
     protected void cancelOrder(String track) {
         given().header("Content-type", JSON).and().body("{\"track\":" + track + "}").when().put(baseUrl + orderCancelAPIMethod);
     }
