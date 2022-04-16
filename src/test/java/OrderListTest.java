@@ -29,18 +29,11 @@ public class OrderListTest {
     }
 
     @Test
-    @DisplayName("Тест метода запроса списка заказов, проверка кода ответа")
-    @Description("Запрос списка заказов возвращает код 200")
+    @DisplayName("Тест метода запроса списка заказов, проверка кода и тела ответа")
+    @Description("Запрос списка заказов возвращает код 200 и список заказов в качестве значения для \"orders\"")
     public void isOrderListRequestReturnsExpectedStatusCodeTest() {
         Response response = client.doGetRequest(client.getOrderListAPIMethod());
-        response.then().assertThat().statusCode(expectedStatusCode);
-    }
-
-    @Test
-    @DisplayName("Тест метода запроса списка заказов, проверка тела ответа")
-    @Description("Запрос списка заказов возвращает список заказов в качестве значения для \"orders\"")
-    public void isOrderListRequestReturnsOrdersTest() {
-        Response response = client.doGetRequest(client.getOrderListAPIMethod());
-        response.then().body("orders", notNullValue());
+        response.then().assertThat().statusCode(expectedStatusCode)
+                .and().body("orders", notNullValue());
     }
 }

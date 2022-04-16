@@ -28,19 +28,12 @@ public class CourierLoginTest {
     }
 
     @Test
-    @DisplayName("Тест метода логирования в системе с использованием корректной пары логин/ пароль проверка возвращаемого кода")
-    @Description("При использовании метода логирования в системе с существующей парой логин/ пароль возвращается код 200")
-    public void isLoginWithCorrectLoginDataPossibleAndReturnsStatusCode200Test() {
+    @DisplayName("Тест метода логирования в системе с использованием корректной пары логин/ пароль проверка возвращаемого кода и тела возвращаемого сообщения")
+    @Description("При использовании метода логирования в системе с существующей парой логин/ пароль возвращается код 200 и id курьера")
+    public void isLoginWithCorrectLoginDataPossibleAndReturnsStatusCode200AndIdValueTest() {
         Response response = client.doPostRequest(client.getLoginAPIMethod(), courier.getLoginRequestBody());
-        response.then().assertThat().statusCode(200);
-    }
-
-    @Test
-    @DisplayName("Тест метода логирования в системе с использованием корректной пары логин/ пароль, проверка тела возвращаемого сообщения")
-    @Description("При использовании метода логирования в системе с существующей парой логин/ пароль возвращается id курьера")
-    public void isLoginWithCorrectLoginDataPossibleAndReturnsIdValueTest() {
-        Response response = client.doPostRequest(client.getLoginAPIMethod(), courier.getLoginRequestBody());
-        response.then().body("id", any(Integer.class));
+        response.then().assertThat().statusCode(200)
+                .and().body("id", any(Integer.class));
     }
 
     @Test

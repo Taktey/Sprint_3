@@ -29,25 +29,14 @@ public class OrderCreationTest {
     }
 
     @Test
-    @DisplayName("Тест метода создания заказа, с различным значением цвета, проверка статус-кода ответа")
-    @Description("Заказ может быть создан с передачей цвета BLACK, GREY, обоих одновременно или ни одного из них, возвращается код 201")
+    @DisplayName("Тест метода создания заказа, с различным значением цвета, проверка статус-кода и тела ответа")
+    @Description("Заказ может быть создан с передачей цвета BLACK, GREY, обоих одновременно или ни одного из них, возвращается код 201 и сообщение с номером заказа (track)")
     public void isOrderCanBeCreatedWithBlackGreyAnyOtherOrNoneColorAndReturnsExpectedStatusCodeTest() {
         Order order = new Order(color);
         BaseHTTPClient client = new BaseHTTPClient();
         Response response = client.doPostRequestOrderBody(client.getCreateOrderAPIMethod(), order);
-        response.then().assertThat().statusCode(expectedStatusCode);
-        String track = response.then().extract().response().body().path("[0].track");
-        client.cancelOrder(track);
-    }
-
-    @Test
-    @DisplayName("Тест метода создания заказа, с различным значением цвета, проверка тела ответа")
-    @Description("Заказ может быть создан с передачей цвета BLACK, GREY, обоих одновременно или ни одного из них, возвращается сообщение с номером заказа (track)")
-    public void isOrderCanBeCreatedWithBlackGreyAnyOtherOrNoneColorAndReturnsTrackValueTest() {
-        Order order = new Order(color);
-        BaseHTTPClient client = new BaseHTTPClient();
-        Response response = client.doPostRequestOrderBody(client.getCreateOrderAPIMethod(), order);
-        response.then().body("track", any(Integer.class));
+        response.then().assertThat().statusCode(expectedStatusCode)
+                .and().body("track", any(Integer.class));
         String track = response.then().extract().response().body().path("[0].track");
         client.cancelOrder(track);
     }

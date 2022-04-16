@@ -29,22 +29,13 @@ public class CourierCreationNegativeTest {
     }
 
     @Test
-    @DisplayName("Негативный тест метода регистрации курьера проверка кода ответа")
-    @Description("Регистрация курьера невозможна без логина и пароля, при попытке возвращается код 400")
-    public void isRegistrationWithoutRegDataReturnsStatusCode400Test() {
+    @DisplayName("Негативный тест метода регистрации курьера проверка кода и тела ответа ответа")
+    @Description("Регистрация курьера невозможна без логина и пароля, при попытке возвращается код 400, сообщение \"Недостаточно данных для создания учетной записи\"")
+    public void isRegistrationWithoutRegDataReturnsStatusCode400AndErrorMessageTest() {
         Courier courier = new Courier(login, password);
         BaseHTTPClient client = new BaseHTTPClient();
         Response response = client.doPostRequest(client.getCreateClientAPIMethod(), courier.getRegisterRequestBody());
-        response.then().assertThat().statusCode(expectedStatusCode);
-    }
-
-    @Test
-    @DisplayName("Негативный тест метода регистрации курьера, проверка тела ответа")
-    @Description("Регистрация курьера невозможна без логина и пароля, при попытке возвращается сообщение \"Недостаточно данных для создания учетной записи\"")
-    public void isRegistrationWithoutRegDataReturnsErrorMessageTest() {
-        Courier courier = new Courier(login, password);
-        BaseHTTPClient client = new BaseHTTPClient();
-        Response response = client.doPostRequest(client.getCreateClientAPIMethod(), courier.getRegisterRequestBody());
-        response.then().body("message", equalTo(errorMessage));
+        response.then().assertThat().statusCode(expectedStatusCode)
+                .and().body("message", equalTo(errorMessage));
     }
 }

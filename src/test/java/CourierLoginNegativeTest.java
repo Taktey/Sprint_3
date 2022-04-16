@@ -30,21 +30,13 @@ public class CourierLoginNegativeTest {
     }
 
     @Test
-    @DisplayName("Негативный тест метода логирования в системе, проверка возвращаемого статус-кода")
-    @Description("При передаче неполных данных возвращается статус-код 400")
-    public void isLoginWithoutPartLoginDataForbiddenAndReturnsExpectedStatusCodeTest() {
+    @DisplayName("Негативный тест метода логирования в системе, проверка возвращаемого статус-кода и тела ответа")
+    @Description("При передаче неполных данных возвращается статус-код 400 и сообщение об ошибке")
+    public void isLoginWithoutPartLoginDataForbiddenAndReturnsExpectedStatusCodeAndErrorMessageTest() {
         Courier courier = new Courier(login, password);
         Response response = client.doPostRequest(client.getLoginAPIMethod(), courier.getLoginRequestBody());
-        response.then().assertThat().statusCode(expectedStatusCode);
-    }
-
-    @Test
-    @DisplayName("Негативный тест метода логирования в системе, проверка тела ответа")
-    @Description("При передаче неполных данных возвращается сообщение об ошибке")
-    public void isLoginWithoutPartLoginDataForbiddenAndReturnsErrorMessageTest() {
-        Courier courier = new Courier(login, password);
-        Response response = client.doPostRequest(client.getLoginAPIMethod(), courier.getLoginRequestBody());
-        response.then().body("message", equalTo(expectedErrorMessage));
+        response.then().assertThat().statusCode(expectedStatusCode)
+                .and().body("message", equalTo(expectedErrorMessage));
     }
 
 }
