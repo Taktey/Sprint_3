@@ -1,0 +1,30 @@
+# Created at 2022-04-16T10:56:53.976
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2022-04-16T10:56:53.977
+WARNING: Illegal reflective access by org.codehaus.groovy.vmplugin.v9.Java9 (file:/C:/Users/user/.m2/repository/org/apache/groovy/groovy/4.0.1/groovy-4.0.1.jar) to constructor java.lang.AssertionError(java.lang.String)
+
+# Created at 2022-04-16T10:56:53.979
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.vmplugin.v9.Java9
+
+# Created at 2022-04-16T10:56:53.979
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2022-04-16T10:56:54.000
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2022-04-16T10:56:54.001
+WARNING: Illegal reflective access by org.codehaus.groovy.vmplugin.v9.Java9 (file:/C:/Users/user/.m2/repository/org/apache/groovy/groovy/4.0.1/groovy-4.0.1.jar) to constructor java.lang.AssertionError(java.lang.String)
+
+# Created at 2022-04-16T10:56:54.002
+WARNING: All illegal access operations will be denied in a future release
+
+# Created at 2022-04-16T10:56:54.003
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.vmplugin.v9.Java9
+
+# Created at 2022-04-16T10:56:54.004
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2022-04-16T10:56:54.005
+WARNING: All illegal access operations will be denied in a future release
+
